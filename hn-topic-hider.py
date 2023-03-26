@@ -6,7 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from algorithms import source_match, keyword_match
-from settings import HEADERS, SOURCES, KEYWORDS, BASE_URL
+from settings import HEADERS, SOURCES, KEYWORDS, BASE_URL, SLEEP_SECONDS
 
 
 while True:
@@ -16,6 +16,8 @@ while True:
 
     if r.status_code != 200:
         sys.stderr.write(f"Bad status code: {r.status_code}\n")
+        time.sleep(SLEEP_SECONDS)
+        continue
 
     soup = BeautifulSoup(r.text, 'html.parser')
 
@@ -49,4 +51,4 @@ while True:
             print(f"hiding {reason}: {title} ({source})")
             time.sleep(1)
 
-    time.sleep(5 * 60)
+    time.sleep(SLEEP_SECONDS)
