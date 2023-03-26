@@ -6,9 +6,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from algorithms import source_match, keyword_match
-from settings import HEADERS, SOURCES, KEYWORDS
+from settings import HEADERS, SOURCES, KEYWORDS, BASE_URL
 
-BASE_URL = "https://news.ycombinator.com/"
 
 while True:
     
