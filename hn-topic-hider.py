@@ -12,7 +12,12 @@ from settings import HEADERS, BASE_URL, SLEEP_SECONDS
 while True:
     
     print(f"Starting fetch at {datetime.datetime.now()}")
-    r = requests.get(BASE_URL, headers=HEADERS)
+    try:
+        r = requests.get(BASE_URL, headers=HEADERS)
+    except requests.exceptions.ConnectTimeout:
+        sys.stderr.write(f"Can't connect to {BASE_URL}\n")
+        time.sleep(SLEEP_SECONDS)
+        continue
 
     if r.status_code != 200:
         sys.stderr.write(f"Bad status code: {r.status_code}\n")
