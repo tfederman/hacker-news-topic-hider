@@ -5,8 +5,8 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-from algorithms import source_match, keyword_match
-from settings import HEADERS, SOURCES, KEYWORDS, BASE_URL, SLEEP_SECONDS
+from algorithms import source_match, title_match
+from settings import HEADERS, BASE_URL, SLEEP_SECONDS
 
 
 while True:
@@ -25,7 +25,7 @@ while True:
 
         try:
             titleline = athing.find(class_="titleline")
-            subline = athing.next_sibling.find(class_="subline")
+            subtext = athing.next_sibling.find(class_="subtext")
         except AttributeError:
             continue
 
@@ -35,14 +35,14 @@ while True:
             source = ""
 
         title = titleline.find("a").text
-        hide_path = subline.find(lambda e: e.attrs.get("href", "").startswith("hide?")).attrs["href"]
+        hide_path = subtext.find(lambda e: e.attrs.get("href", "").startswith("hide?")).attrs["href"]
 
         hide = False
 
         if source_match(source):
             hide = True
             reason = "source"
-        elif keyword_match(title):
+        elif title_match(title):
             hide = True
             reason = "title"
 
