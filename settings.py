@@ -17,6 +17,8 @@ HEADERS = {
     'Sec-GPC': '1',
 }
 
-KEYWORDS = ["google", "microsoft", "apple", "amazon", "whatever"]
+SUBSTRINGS = ["google", "microsoft", "apple", "amazon", "whatever"]
+
+KEYWORDS = ["apple", "amazon", "twitter"]
 
 SOURCES = ["bloomberg.com", "twitter.com",  "medium.com/whoever"]
